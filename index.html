@@ -16,11 +16,11 @@ body{
     font-family:'Poppins',sans-serif;
 }
 
-/* Floating Hearts */
+/* Floating hearts */
 .heart{
     position:absolute;
-    color:rgba(255,255,255,0.7);
     font-size:20px;
+    opacity:0.7;
     animation:float 6s linear infinite;
 }
 @keyframes float{
@@ -72,9 +72,12 @@ button{
     background:#ff1e1e;
     color:#fff;
     position:absolute;
-    animation:blink 0.6s infinite;
 }
 
+/* Blink only on hover */
+.blink{
+    animation:blink 0.6s infinite;
+}
 @keyframes blink{
     0%{opacity:1;}
     50%{opacity:0.25;}
@@ -92,17 +95,22 @@ button{
 </div>
 
 <script>
-/* NO button movement */
 const no = document.getElementById("no");
+
+/* Move NO only when cursor comes */
+no.addEventListener("mouseenter", () => {
+    no.classList.add("blink");
+    moveNo();
+});
+
 function moveNo(){
-    const x = Math.random() * (window.innerWidth - 120);
-    const y = Math.random() * (window.innerHeight - 120);
+    const x = Math.random() * (window.innerWidth - 140);
+    const y = Math.random() * (window.innerHeight - 140);
     no.style.left = x + "px";
     no.style.top = y + "px";
 }
-setInterval(moveNo,500);
 
-/* YES click – Final Love Meme */
+/* YES click – love meme */
 function yes(){
     document.body.innerHTML = `
     <div style="
@@ -114,14 +122,10 @@ function yes(){
         background:linear-gradient(135deg,#ff2f6d,#ff9acb);
         color:white;
         text-align:center;
-        font-family:Poppins,sans-serif;
         padding:20px;
     ">
-        <h1 style="font-size:56px; margin-bottom:10px;">YAYYY ❤️😍</h1>
-
-        <p style="font-size:30px; margin-bottom:28px;">
-            Happy Valentine’s Day 💖
-        </p>
+        <h1 style="font-size:56px;">YAYYY ❤️😍</h1>
+        <p style="font-size:30px;">Happy Valentine’s Day 💖</p>
 
         <div style="
             background:rgba(255,255,255,0.22);
@@ -129,29 +133,25 @@ function yes(){
             border-radius:22px;
             box-shadow:0 0 35px rgba(255,0,120,0.7);
             font-size:26px;
-            line-height:1.5;
+            margin-top:20px;
         ">
             😌❤️<br>
             <b>Ab mana karne ka option tha hi nahi</b><br>
             ♾️ Love you forever ♾️
         </div>
-
-        <p style="margin-top:30px; font-size:22px;">
-            🥰💑
-        </p>
     </div>`;
 }
 
-/* Hearts generator */
+/* Hearts animation */
 setInterval(()=>{
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤️";
-    heart.style.left = Math.random()*100 + "vw";
-    heart.style.fontSize = (18 + Math.random()*22) + "px";
+    const heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="❤️";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(18+Math.random()*22)+"px";
     document.body.appendChild(heart);
     setTimeout(()=>heart.remove(),6000);
-},280);
+},300);
 </script>
 
 </body>
