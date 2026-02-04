@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine 💘</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    background: linear-gradient(135deg,#ff2f6d,#ff9acb);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    font-family:'Poppins',sans-serif;
+}
+
+/* Floating Hearts */
+.heart{
+    position:absolute;
+    color:rgba(255,255,255,0.7);
+    font-size:20px;
+    animation:float 6s linear infinite;
+}
+@keyframes float{
+    0%{transform:translateY(100vh);opacity:0;}
+    30%{opacity:1;}
+    100%{transform:translateY(-10vh);opacity:0;}
+}
+
+/* Card */
+.card{
+    background:rgba(255,255,255,0.18);
+    backdrop-filter: blur(12px);
+    border-radius:28px;
+    padding:45px 55px;
+    text-align:center;
+    color:#fff;
+    box-shadow:0 0 45px rgba(255,0,120,0.6);
+}
+
+.card h1{
+    font-size:44px;
+    margin-bottom:35px;
+}
+
+/* Buttons */
+button{
+    padding:16px 48px;
+    font-size:22px;
+    border:none;
+    border-radius:50px;
+    cursor:pointer;
+}
+
+#yes{
+    background:#00ffb2;
+    color:#000;
+    animation:pulse 1.4s infinite;
+    box-shadow:0 0 30px #00ffb2;
+    margin-right:20px;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.12);}
+    100%{transform:scale(1);}
+}
+
+#no{
+    background:#ff1e1e;
+    color:#fff;
+    position:absolute;
+    animation:blink 0.6s infinite;
+}
+
+@keyframes blink{
+    0%{opacity:1;}
+    50%{opacity:0.25;}
+    100%{opacity:1;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>Will you be my Valentine? 💖</h1>
+    <button id="yes" onclick="yes()">YES ❤️</button>
+    <button id="no">NO 💔</button>
+</div>
+
+<script>
+/* NO button movement */
+const no = document.getElementById("no");
+function moveNo(){
+    const x = Math.random() * (window.innerWidth - 120);
+    const y = Math.random() * (window.innerHeight - 120);
+    no.style.left = x + "px";
+    no.style.top = y + "px";
+}
+setInterval(moveNo,500);
+
+/* YES click – Final Love Meme */
+function yes(){
+    document.body.innerHTML = `
+    <div style="
+        height:100vh;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        background:linear-gradient(135deg,#ff2f6d,#ff9acb);
+        color:white;
+        text-align:center;
+        font-family:Poppins,sans-serif;
+        padding:20px;
+    ">
+        <h1 style="font-size:56px; margin-bottom:10px;">YAYYY ❤️😍</h1>
+
+        <p style="font-size:30px; margin-bottom:28px;">
+            Happy Valentine’s Day 💖
+        </p>
+
+        <div style="
+            background:rgba(255,255,255,0.22);
+            padding:28px 38px;
+            border-radius:22px;
+            box-shadow:0 0 35px rgba(255,0,120,0.7);
+            font-size:26px;
+            line-height:1.5;
+        ">
+            😌❤️<br>
+            <b>Ab mana karne ka option tha hi nahi</b><br>
+            ♾️ Love you forever ♾️
+        </div>
+
+        <p style="margin-top:30px; font-size:22px;">
+            🥰💑
+        </p>
+    </div>`;
+}
+
+/* Hearts generator */
+setInterval(()=>{
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.fontSize = (18 + Math.random()*22) + "px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),6000);
+},280);
+</script>
+
+</body>
+</html>
