@@ -38,6 +38,7 @@ body{
     text-align:center;
     color:#fff;
     box-shadow:0 0 45px rgba(255,0,120,0.6);
+    position:relative;
 }
 
 .card h1{
@@ -71,10 +72,12 @@ button{
 #no{
     background:#ff1e1e;
     color:#fff;
-    position:absolute;
+    position:fixed;   /* IMPORTANT */
+    top:60%;
+    left:55%;
 }
 
-/* Blink only on hover */
+/* Blink effect */
 .blink{
     animation:blink 0.6s infinite;
 }
@@ -97,20 +100,29 @@ button{
 <script>
 const no = document.getElementById("no");
 
-/* Move NO only when cursor comes */
-no.addEventListener("mouseenter", () => {
-    no.classList.add("blink");
-    moveNo();
+/* Cursor paas aaye to NO bhaage */
+document.addEventListener("mousemove", (e) => {
+    const rect = no.getBoundingClientRect();
+
+    const distance = Math.hypot(
+        e.clientX - (rect.left + rect.width / 2),
+        e.clientY - (rect.top + rect.height / 2)
+    );
+
+    if (distance < 120) {
+        no.classList.add("blink");
+        moveNo();
+    }
 });
 
 function moveNo(){
-    const x = Math.random() * (window.innerWidth - 140);
-    const y = Math.random() * (window.innerHeight - 140);
+    const x = Math.random() * (window.innerWidth - 150);
+    const y = Math.random() * (window.innerHeight - 150);
     no.style.left = x + "px";
     no.style.top = y + "px";
 }
 
-/* YES click – love meme */
+/* YES click */
 function yes(){
     document.body.innerHTML = `
     <div style="
